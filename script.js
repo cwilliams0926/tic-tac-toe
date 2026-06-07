@@ -74,7 +74,7 @@ const gameController = ((
 
   const playRound = (row, column) => {
     console.log(
-      `Dropping ${getActivePlayer().name}'s token into row ${row}, column ${column}...`,
+      `Dropping ${getActivePlayer().name}'s token into row ${row + 1}, column ${column + 1}...`,
     );
     board.playToken(row, column, getActivePlayer().token);
 
@@ -89,5 +89,3 @@ const gameController = ((
 
   return { playRound, getActivePlayer };
 })();
-
-gameController.playRound(0, 0);
