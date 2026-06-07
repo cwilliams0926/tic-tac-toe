@@ -4,7 +4,7 @@ const gameboard = (() => {
 
   for (let i = 0; i < SIZE; i++) {
     board[i] = [];
-    for (let j = 0; j < SIZE; i++) {
+    for (let j = 0; j < SIZE; j++) {
       board[i].push(Cell());
     }
   }
@@ -89,3 +89,5 @@ const gameController = ((
 
   return { playRound, getActivePlayer };
 })();
+
+gameController.playRound(0, 0);
