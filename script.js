@@ -20,6 +20,15 @@ const gameboard = (() => {
 
     board[row][column].addToken(player);
   };
+
+  const printBoard = () => {
+    const boardWithCellValues = board.map((row) =>
+      row.map((cell) => cell.getValue()),
+    );
+    console.log(boardWithCellValues);
+  };
+
+  return { getBoard, playToken, printBoard };
 })();
 
 function Cell() {
@@ -33,3 +42,50 @@ function Cell() {
 
   return { addToken, getValue };
 }
+
+const gameController = ((
+  playerOneName = "Player One",
+  playerTwoName = "Player Two",
+) => {
+  const board = gameboard;
+
+  const players = [
+    {
+      name: playerOneName,
+      token: 1,
+    },
+    {
+      name: playerTwoName,
+      token: 2,
+    },
+  ];
+
+  let activePlayer = players[0];
+
+  const switchPlayerTurn = () => {
+    activePlayer = activePlayer === players[0] ? players[1] : players[0];
+  };
+  const getActivePlayer = () => activePlayer;
+
+  const printNewRound = () => {
+    board.printBoard();
+    console.log(`${getActivePlayer().name}'s turn.`);
+  };
+
+  const playRound = (row, column) => {
+    console.log(
+      `Dropping ${getActivePlayer().name}'s token into row ${row}, column ${column}...`,
+    );
+    board.playToken(row, column, getActivePlayer().token);
+
+    // Where checking for a winner logic would go
+
+    switchPlayerTurn();
+    printNewRound();
+  };
+
+  // Initial play game message
+  printNewRound();
+
+  return { playRound, getActivePlayer };
+})();
