@@ -105,6 +105,11 @@ const gameController = ((
     if (isWinningLine(upperRightDiagonal)) return upperRightDiagonal[0];
   };
 
+  const checkTie = () => {
+    const boardWithCellValues = board.getBoardWithCellValues();
+    return !boardWithCellValues.some((row) => row.includes(""));
+  };
+
   const playRound = (row, column) => {
     console.log(
       `Dropping ${getActivePlayer().name}'s token into row ${row + 1}, column ${column + 1}...`,
@@ -114,6 +119,12 @@ const gameController = ((
     if (checkWinner()) {
       board.printBoard();
       console.log(`${getActivePlayer().name} wins!`);
+      return;
+    }
+
+    if (checkTie()) {
+      board.printBoard();
+      console.log("Tie!");
       return;
     }
 
