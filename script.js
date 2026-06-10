@@ -79,7 +79,7 @@ const gameController = ((
   };
 
   const checkWinner = () => {
-    const boardWithCellValues = board.getBoardWithCellValues;
+    const boardWithCellValues = board.getBoardWithCellValues();
     for (const row of boardWithCellValues) {
       if (isWinningLine(row)) return row[0];
     }
@@ -112,6 +112,7 @@ const gameController = ((
     board.playToken(row, column, getActivePlayer().token);
 
     if (checkWinner()) {
+      board.printBoard();
       console.log(`${getActivePlayer().name} wins!`);
       return;
     }
