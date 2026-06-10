@@ -13,7 +13,7 @@ const gameboard = (() => {
 
   const playToken = (row, column, player) => {
     const availableCells = board
-      .filter((row) => row[column].getValue() === 0)
+      .filter((row) => row[column].getValue() === "")
       .map((row) => row[column]);
 
     if (!availableCells.length) return;
@@ -21,18 +21,20 @@ const gameboard = (() => {
     board[row][column].addToken(player);
   };
 
+  const getBoardWithCellValues = () => {
+    return board.map((row) => row.map((cell) => cell.getValue()));
+  };
+
   const printBoard = () => {
-    const boardWithCellValues = board.map((row) =>
-      row.map((cell) => cell.getValue()),
-    );
+    const boardWithCellValues = getBoardWithCellValues();
     console.log(boardWithCellValues);
   };
 
-  return { getBoard, playToken, printBoard };
+  return { getBoard, getBoardWithCellValues, playToken, printBoard };
 })();
 
 function Cell() {
-  let value = 0;
+  let value = "";
 
   const addToken = (player) => {
     value = player;
@@ -72,13 +74,47 @@ const gameController = ((
     console.log(`${getActivePlayer().name}'s turn.`);
   };
 
+  const isWinningLine = (cells) => {
+    return cells[0] !== "" && cells[0] === cells[1] && cells[1] === cells[2];
+  };
+
+  const checkWinner = () => {
+    const boardWithCellValues = board.getBoardWithCellValues;
+    for (const row of boardWithCellValues) {
+      if (isWinningLine(row)) return row[0];
+    }
+
+    const columns = boardWithCellValues[0].map((_, colIndex) =>
+      boardWithCellValues.map((row) => row[colIndex]),
+    );
+    for (const row of columns) {
+      if (isWinningLine(row)) return row[0];
+    }
+
+    const upperLeftDiagonal = [
+      boardWithCellValues[2][0],
+      boardWithCellValues[1][1],
+      boardWithCellValues[0][2],
+    ];
+    const upperRightDiagonal = [
+      boardWithCellValues[0][0],
+      boardWithCellValues[1][1],
+      boardWithCellValues[2][2],
+    ];
+    if (isWinningLine(upperLeftDiagonal)) return upperLeftDiagonal[0];
+    if (isWinningLine(upperRightDiagonal)) return upperRightDiagonal[0];
+  };
+
   const playRound = (row, column) => {
     console.log(
       `Dropping ${getActivePlayer().name}'s token into row ${row + 1}, column ${column + 1}...`,
     );
     board.playToken(row, column, getActivePlayer().token);
 
-    // Where checking for a winner logic would go
+    if (checkWinner()) {
+      console.log(`${getActivePlayer().name} wins!`);
+      return;
+    }
 
     switchPlayerTurn();
     printNewRound();
