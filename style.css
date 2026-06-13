@@ -1,0 +1,28 @@
+:root {
+  --jet-black: #292f36;
+  --strong-cyan: #4ecdc4;
+  --mint-cream: #f7fff7;
+  --grapefruit-pink: #ff6b6b;
+  --royal-gold: #ffe66d;
+
+  --font-family: "Fredoka", system-ui, "Segoe UI", Helvetica, Arial, sans-serif;
+}
+
+* {
+  margin: 0;
+  box-sizing: border-box;
+}
+
+img,
+picture,
+video,
+canvas,
+svg {
+  display: block;
+  max-width: 100%;
+}
+
+body {
+  font-family: var(--font-family);
+  min-height: 100vh;
+}
