@@ -1,0 +1,27 @@
+:root {
+  --jet-black: #292f36;
+  --strong-cyan: #4ecdc4;
+  --mint-cream: #f7fff7;
+  --grapefruit-pink: #ff6b6b;
+  --royal-gold: #ffe66d;
+
+  --font-family: "Fredoka", system-ui, "Segoe UI", Helvetica, Arial, sans-serif;
+}
+
+body {
+  font-family: var(--font-family);
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: var(--mint-cream);
+}
+
+main {
+  display: grid;
+  padding: 24px;
+  width: 50vw;
+  background-color: var(--strong-cyan);
+  border-radius: 24px;
+  grid-template-columns: 2fr 1fr;
+}
