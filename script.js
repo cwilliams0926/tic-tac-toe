@@ -132,3 +132,15 @@ const gameController = ((
 
   return { playRound, getActivePlayer };
 })();
+
+const screenController = (() => {
+  const game = gameController;
+  const playerTurnDiv = document.querySelector(".turn");
+  const cells = document.querySelectorAll(".cell");
+
+  const updateScreen = () => {
+    cells.forEach((cell) => {
+      cell.textContent = "";
+    });
+  };
+})();
