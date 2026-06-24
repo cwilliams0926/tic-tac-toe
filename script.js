@@ -158,8 +158,12 @@ const screenController = (() => {
       console.log(selectedRow);
       console.log(selectedColumn);
 
-      game.playRound(selectedRow, selectedColumn);
-      updateScreen();
+      cellButton.classList.add("placing");
+      setTimeout(() => {
+        game.playRound(selectedRow, selectedColumn);
+        updateScreen();
+        cellButton.classList.remove("placing");
+      }, 100);
     });
   });
 

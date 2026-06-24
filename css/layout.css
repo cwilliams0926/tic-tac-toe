@@ -25,12 +25,21 @@
 /* All the gameboard cells */
 
 .cell {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   color: var(--jet-black);
   background: none;
   border: none;
-  text-align: center;
-  font-size: 64px;
+  font-size: 4rem;
   cursor: pointer;
+  width: 72px;
+  height: 72px;
+  transition: opacity 0.2s ease;
+}
+
+.cell.placing {
+  opacity: 0;
 }
 
 .cell.cell-0 {
