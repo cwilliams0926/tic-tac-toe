@@ -35,7 +35,7 @@
   cursor: pointer;
   width: 72px;
   height: 72px;
-  transition: opacity 0.2s ease;
+  transition: opacity 0.3s ease;
 }
 
 .cell.placing {

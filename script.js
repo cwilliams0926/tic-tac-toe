@@ -1,4 +1,4 @@
-const gameboard = (() => {
+function gameboard() {
   const SIZE = 3;
   const board = [];
 
@@ -21,7 +21,7 @@ const gameboard = (() => {
   };
 
   return { getBoard, getBoardWithCellValues, playToken };
-})();
+}
 
 function Cell() {
   let value = "";
@@ -35,11 +35,11 @@ function Cell() {
   return { addToken, getValue };
 }
 
-const gameController = ((
+function gameController(
   playerOneName = "Player One",
   playerTwoName = "Player Two",
-) => {
-  const board = gameboard;
+) {
+  const board = gameboard();
 
   const players = [
     {
@@ -108,7 +108,7 @@ const gameController = ((
     checkWinner,
     checkTie,
   };
-})();
+}
 
 const screenController = (() => {
   const game = gameController;
@@ -151,7 +151,7 @@ const screenController = (() => {
         game.playRound(selectedRow, selectedColumn);
         updateScreen();
         cellButton.classList.remove("placing");
-      }, 100);
+      }, 150);
     });
   });
 
