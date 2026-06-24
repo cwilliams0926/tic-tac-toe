@@ -130,7 +130,7 @@ const gameController = ((
   // Initial play game message
   printNewRound();
 
-  return { playRound, getActivePlayer };
+  return { playRound, getActivePlayer, getBoard: board.getBoard };
 })();
 
 const screenController = (() => {
@@ -142,5 +142,12 @@ const screenController = (() => {
     cells.forEach((cell) => {
       cell.textContent = "";
     });
+
+    const board = game.getBoard();
+    const activePlayer = game.getActivePlayer();
+
+    playerTurnDiv.textContent = `${activePlayer.name}'s turn...`;
   };
+
+  updateScreen();
 })();
