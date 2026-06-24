@@ -12,12 +12,7 @@ const gameboard = (() => {
   const getBoard = () => board;
 
   const playToken = (row, column, player) => {
-    const availableCells = board
-      .filter((row) => row[column].getValue() === "")
-      .map((row) => row[column]);
-
-    if (!availableCells.length) return;
-
+    if (board[row][column].getValue() !== "") return;
     board[row][column].addToken(player);
   };
 
