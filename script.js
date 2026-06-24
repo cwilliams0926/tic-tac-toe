@@ -1,4 +1,4 @@
-function gameboard() {
+function createGameboard() {
   const SIZE = 3;
   const board = [];
 
@@ -35,11 +35,11 @@ function Cell() {
   return { addToken, getValue };
 }
 
-function gameController(
+function createGameController(
   playerOneName = "Player One",
   playerTwoName = "Player Two",
 ) {
-  const board = gameboard();
+  const board = createGameboard();
 
   const players = [
     {
@@ -111,9 +111,10 @@ function gameController(
 }
 
 const screenController = (() => {
-  const game = gameController;
-  const playerTurnDiv = document.querySelector(".turn");
+  const startGameButton = document.querySelector("#start-button");
   const cellButtons = document.querySelectorAll(".cell");
+  const playerTurnDiv = document.querySelector(".turn");
+  let game;
   let gameOver = false;
 
   const updateScreen = () => {
@@ -154,6 +155,12 @@ const screenController = (() => {
       }, 150);
     });
   });
-
-  updateScreen();
+  startGameButton.addEventListener("click", () => {
+    const playerOneName = document.querySelector("#player-one-name").value;
+    const playerTwoName = document.querySelector("#player-two-name").value;
+    game = createGameController(playerOneName, playerTwoName);
+    gameOver = false;
+    startGameButton.textContent = "Restart Game";
+    updateScreen();
+  });
 })();
