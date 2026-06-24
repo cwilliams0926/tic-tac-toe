@@ -139,10 +139,6 @@ const screenController = (() => {
   const cellButtons = document.querySelectorAll(".cell");
 
   const updateScreen = () => {
-    cellButtons.forEach((cellButton) => {
-      cellButton.textContent = "";
-    });
-
     const board = game.getBoard();
     const activePlayer = game.getActivePlayer();
 
@@ -155,6 +151,17 @@ const screenController = (() => {
       });
     });
   };
+  cellButtons.forEach((cellButton) => {
+    cellButton.addEventListener("click", () => {
+      const selectedRow = cellButton.dataset.row;
+      const selectedColumn = cellButton.dataset.column;
+      console.log(selectedRow);
+      console.log(selectedColumn);
+
+      game.playRound(selectedRow, selectedColumn);
+      updateScreen();
+    });
+  });
 
   updateScreen();
 })();
