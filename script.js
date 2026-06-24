@@ -136,17 +136,24 @@ const gameController = ((
 const screenController = (() => {
   const game = gameController;
   const playerTurnDiv = document.querySelector(".turn");
-  const cells = document.querySelectorAll(".cell");
+  const cellButtons = document.querySelectorAll(".cell");
 
   const updateScreen = () => {
-    cells.forEach((cell) => {
-      cell.textContent = "";
+    cellButtons.forEach((cellButton) => {
+      cellButton.textContent = "";
     });
 
     const board = game.getBoard();
     const activePlayer = game.getActivePlayer();
 
     playerTurnDiv.textContent = `${activePlayer.name}'s turn...`;
+
+    board.forEach((row, rowIndex) => {
+      row.forEach((cell, colIndex) => {
+        const buttonIndex = rowIndex * row.length + colIndex;
+        cellButtons[buttonIndex].textContent = cell.getValue().toLowerCase();
+      });
+    });
   };
 
   updateScreen();
